@@ -1,0 +1,5 @@
+.DS_Store
+__pycache__
+.vscode
+gen_html.py
+templates/*
