@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{date}}</title>
+    </head>
+
+    <body>
+        <h1 style="text-align: center;">Today's words</h1>
+
+        <ul>
+            {% for ranap_word in ranap_words %}
+                <li><a href="{{ranap_word}}.html">{{ranap_word}}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
