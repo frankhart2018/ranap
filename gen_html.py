@@ -53,6 +53,6 @@ generate_new_html(os.path.join("docs", os.path.join(date, "index.html")), index_
 
 for ranap_word, list_value in mapping.items():
     class_template = Template(class_contents)
-    image_paths = list_value[1:-1]
+    image_paths = list_value[1:]
     class_contented_filled = class_template.render(ranap_word=ranap_word, image_paths=image_paths)
     generate_new_html(os.path.join("docs", os.path.join(date, ranap_word + ".html")), class_contented_filled)
