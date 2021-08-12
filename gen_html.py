@@ -19,18 +19,21 @@ def read_mapping_file():
     # - link 2
     # - link 3
     # - link 4
+    # - pronounciation audio gdrive id
     ###################################################
 
-
-    for i in range(0, len(contents), 5):
+    audio_ids = []
+    for i in range(0, len(contents), 6):
         ranap_word, english_word = contents[i].split(":")
         ranap_word = ranap_word.strip()
         english_word = english_word.strip()
         specific_image_paths = contents[i+1:i+5]
         specific_image_paths = [image_path[2:] for image_path in specific_image_paths]
+        audio_id = contents[i+5][1:].strip()
         mapping[ranap_word] = [english_word] + specific_image_paths
+        audio_ids.append(audio_id)
 
-    return mapping, date
+    return mapping, audio_ids, date
 
 def get_template_contents(template_path):
     with open(template_path, "r") as file:
@@ -40,16 +43,16 @@ def generate_new_html(path, contents):
     with open(path, "w") as file:
         file.write(contents)
 
-mapping, date = read_mapping_file()
+mapping, audio_ids, date = read_mapping_file()
 index_contents = get_template_contents("templates/index.html")
 class_contents = get_template_contents("templates/word.html")
 
 index_template = Template(index_contents)
-index_contents_filled = index_template.render(date=date, ranap_words=list(mapping.keys()))
+index_contents_filled = index_template.render(date=date, ranap_words=list(mapping.keys()), audio_ids=audio_ids)
 generate_new_html(os.path.join("docs", os.path.join(date, "index.html")), index_contents_filled)
 
 for ranap_word, list_value in mapping.items():
     class_template = Template(class_contents)
-    image_paths = list_value[1:]
+    image_paths = list_value[1:-1]
     class_contented_filled = class_template.render(ranap_word=ranap_word, image_paths=image_paths)
     generate_new_html(os.path.join("docs", os.path.join(date, ranap_word + ".html")), class_contented_filled)

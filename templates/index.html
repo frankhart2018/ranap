@@ -2,15 +2,53 @@
 <html>
     <head>
         <title>{{date}}</title>
+
+        <style type="text/css">
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            table {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
     </head>
 
     <body>
         <h1 style="text-align: center;">Today's words</h1>
 
-        <ul>
-            {% for ranap_word in ranap_words %}
-                <li><a href="{{ranap_word}}.html">{{ranap_word}}</a></li>
-            {% endfor %}
-        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Pronounciation</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for i in range(ranap_words|length) %}
+                    <tr>
+                        <td>
+                            <a href="{{ranap_words[i]}}.html">{{ranap_words[i]}}</a>
+                        </td>
+                        <td>
+                            <iframe
+                                frameborder="0"
+                                width="500"
+                                height="60"
+                                src="https://drive.google.com/file/d/{{audio_ids[i]}}/preview"
+                            >
+                            </iframe>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </body>
 </html>
