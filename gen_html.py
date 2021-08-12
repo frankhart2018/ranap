@@ -4,22 +4,20 @@ from jinja2 import Template
 
 
 def read_mapping_file():
-    date = datetime.datetime.today().strftime("%d-%m-%Y")
+    # date = datetime.datetime.today().strftime("%d-%m-%Y")
+    date = "11-08-2021"
     dir_name = os.path.join("docs", date)
     mapping_file_path = os.path.join(dir_name, "mapping")
-    images_dir = os.path.join(dir_name, "images")
 
     mapping = {}
     with open(mapping_file_path, "r") as file:
         contents = file.read().split("\n")
 
-    image_paths = os.listdir(images_dir)
-
-    for content_line in contents:
-        ranap_word, english_word = content_line.split(":")
+    for i in range(0, len(contents), 5):
+        ranap_word, english_word = contents[i].split(":")
         ranap_word = ranap_word.strip()
         english_word = english_word.strip()
-        specific_image_paths = [path for path in image_paths if os.path.basename(path).startswith(english_word)]
+        specific_image_paths = contents[i+1:i+5]
         mapping[ranap_word] = [english_word] + specific_image_paths
 
     return mapping, date
