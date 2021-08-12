@@ -12,6 +12,16 @@ def read_mapping_file():
     with open(mapping_file_path, "r") as file:
         contents = file.read().split("\n")
 
+    ###################################################
+    # Format:-
+    # ranap_word : english_word
+    # - link 1
+    # - link 2
+    # - link 3
+    # - link 4
+    ###################################################
+
+
     for i in range(0, len(contents), 5):
         ranap_word, english_word = contents[i].split(":")
         ranap_word = ranap_word.strip()
