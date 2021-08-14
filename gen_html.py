@@ -3,8 +3,8 @@ import os
 from jinja2 import Template
 
 
-def read_mapping_file():
-    date = datetime.datetime.today().strftime("%d-%m-%Y")
+def read_mapping_file(date=None):
+    date = datetime.datetime.today().strftime("%d-%m-%Y") if date == None else date
     dir_name = os.path.join("docs", date)
     mapping_file_path = os.path.join(dir_name, "mapping")
 
