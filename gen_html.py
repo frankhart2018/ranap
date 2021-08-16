@@ -43,7 +43,7 @@ def generate_new_html(path, contents):
     with open(path, "w") as file:
         file.write(contents)
 
-mapping, audio_ids, date = read_mapping_file(date="14-08-2021")
+mapping, audio_ids, date = read_mapping_file()
 index_contents = get_template_contents("templates/index.html")
 class_contents = get_template_contents("templates/word.html")
 
